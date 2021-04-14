@@ -123,20 +123,33 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
-  // if string is only one character
   if (string.length === 1) {
-    // return string
     return string;
   }
-  // create result that is the last character of input
   var result = string.slice(-1);
-  // return result concated with reverse called on new string
   return result += reverse(string.slice(0, -1));
 
 };
 
 // 10. Write a function that determines if a string is a palindrome.
+
+// the eht
+
 var palindrome = function(string) {
+  string = string.trim().split(' ').join('').toLowerCase();
+
+  if (string.length <= 1) {
+    return true;
+  } else {
+    var first = string[0];
+    var last = string[string.length - 1];
+
+    if (first === last) {
+      return palindrome(string.slice(1, -1));
+    } else {
+      return false;
+    }
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -145,6 +158,56 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if (x <= 0 && y < 0) {
+    if (x <= y) {
+      x = -x;
+      y = -y;
+      var z = x - y;
+      if (z >= y) {
+        return modulo(z, y);
+      } else {
+        return -z;
+      }
+    } else {
+      return x;
+    }
+  }
+  if (x >= 0 && y > 0) {
+    if (x >= y) {
+      var z = x - y;
+      if (z >= y) {
+        return modulo(z, y);
+      } else {
+        return z;
+      }
+    } else {
+      return x;
+    }
+  }
+  if (x < 0) {
+    if (-x >= y) {
+      var z = -x - y;
+      if (z >= y) {
+        return -modulo(z, y);
+      } else {
+        return -z;
+      }
+    } else {
+      return x;
+    }
+  }
+  if (y < 0) {
+    if (x >= -y)  {
+      var z = x - -y;
+      if (z >= -y) {
+        return -modulo(z, y);
+      } else {
+        return -z;
+      }
+    } else {
+      return -x;
+    }
+  }
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
